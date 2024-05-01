@@ -2,11 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <meta name="viewport" content="width=device-width" />
+    <title>Qoosh: Bring Your Code On!</title>
     %sveltekit.head%
   </head>
   <body>
-    %sveltekit.body%
+    <script src="./node_modules/blockly/blockly_compressed.js"></script>
+    <script src="./node_modules/blockly/blocks_compressed.js"></script>
+    <script src="./node_modules/blockly/javascript_compressed.js"></script>
+    <script src="./node_modules/blockly/msg/en.js"></script>
+    <div style="display: contents">
+      %sveltekit.body%
+    </div>
   </body>
 </html>

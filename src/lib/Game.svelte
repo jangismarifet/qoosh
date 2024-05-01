@@ -1,31 +1,50 @@
 <script>
-    import Square from "./Square.svelte";
-
-    let currentPosition = 0;
-    let letters = ["Q", "", "", "", ""]; // 5 squares
-
-    function moveLeft() {
-        if (currentPosition > 0) {
-            currentPosition--;
+    import Square from './Square.svelte';
+    let loc = [0, 0]
+    let grid = [];
+    for (let i = 0; i < 5; i++) {
+        let row = [];
+        for (let j = 0; j < 5; j++) {
+            let square = {
+                x: j,
+                y: i,
+                occupied: false,
+            };
+            if (j === loc[1] && i === loc[0]) {
+                square.occupied = true;
+            }
+            row.push(square);
+        }
+        grid[i] = row;
+    }
+    function moveDown() {
+        if (loc[0] < 4) {
+            grid[loc[1]][loc[0]].occupied = false;
+            loc[1]++;
+            grid[loc[1]][loc[0]].occupied = true;
         }
     }
-
-    function moveRight() {
-        if (currentPosition < letters.length - 1) {
-            currentPosition++;
-        }
-    }
+    moveDown()
+    moveDown()
+    
 </script>
 
-<div>
-    <div>
-        {#each letters as letter, i}
-            <Square {letter} {currentPosition} index={i} />
+<div id="grid">
+    {#each grid as row}
+    <div class="row">
+        {#each row as square}
+            <Square {square} />
         {/each}
     </div>
-    <br /><br /><br /><br /><br /><br />
-    <div>
-        <button on:click={moveLeft}>Left Arrow</button>
-        <button on:click={moveRight}>Right Arrow</button>
-    </div>
+{/each}
 </div>
+<style>
+    #grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .row {
+        display: flex;
+    }
+</style>

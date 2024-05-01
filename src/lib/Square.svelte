@@ -1,34 +1,21 @@
 <script>
-    export let letter;
-    export let currentPosition;
-    export let index;
-
-    let translateY = 0;
-
-    $: {
-        if (index < currentPosition) {
-            translateY = -50;
-        } else if (index > currentPosition) {
-            translateY = 50;
-        } else {
-            translateY = 0;
-        }
-    }
+    import Horse from "/home/j/blockly_tests/ver0/src/media/runningHorse/horse01.svg";
+    export let square;
 </script>
 
-<div class="square" style="transform: translateY({translateY}px);">
-    {letter}
+<div class="square" propValue={square}>
+    {#if square && square.occupied}
+        <object data={Horse} width="30px" height="30px" aria-label="Running Horse"></object>
+    {/if}
 </div>
 
 <style>
-    .square {
-        width: 50px;
-        height: 50px;
-        border: 1px solid black;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 24px;
-        transition: transform 0.7s ease;
-    }
+  .square {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
